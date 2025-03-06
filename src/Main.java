@@ -1,62 +1,56 @@
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
     public static void main(String[] args) {
-        legacyCode();
-        legacyHashtableExample();
-        legacyThreadExample();
-        legacyRandomExample();
+        dateExample();
+        comparatorExample();
+        syncMapExample();
+        randomExample();
+        loopExample();
     }
 
-    public static void legacyCode() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("Hello, ");
-        sb.append("World!");
-        System.out.println(sb.toString());
-
+    public static void dateExample() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(1990, Calendar.JANUARY, 1);
+        calendar.set(2023, Calendar.DECEMBER, 31, 23, 59, 59);
         Date oldDate = calendar.getTime();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println("Old Date: " + sdf.format(oldDate));
+    }
 
+    public static void comparatorExample() {
         List<String> names = Arrays.asList("John", "Alice", "Bob");
+
         Collections.sort(names, new Comparator<String>() {
             public int compare(String s1, String s2) {
                 return s1.compareTo(s2);
             }
         });
 
-        System.out.println("Sorted names: " + names);
+        System.out.println(names);
     }
 
-    public static void legacyHashtableExample() {
-        Hashtable<Integer, String> table = new Hashtable<Integer, String>();
-
-        table.put(1, "One");
-        table.put(2, "Two");
-        table.put(3, "Three");
-
-        System.out.println("Hashtable values: " + table);
+    public static void syncMapExample() {
+        Map<String, Integer> map = Collections.synchronizedMap(new HashMap<String, Integer>());
+        synchronized (map) {
+            map.put("key1", 1);
+            map.put("key2", 2);
+        }
+        System.out.println(map);
     }
 
-    public static void legacyThreadExample() {
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                System.out.println("Thread is running...");
-            }
-        });
-
-        thread.start();
+    public static void randomExample() {
+        Random random = new Random();
+        System.out.println("Random number: " + random.nextInt(100));
     }
 
-    public static void legacyRandomExample() {
-        int randomNumber = ThreadLocalRandom.current().nextInt(100);
+    public static void loopExample() {
+        List<String> names = Arrays.asList("John", "Alice", "Bob");
 
-        System.out.println("ThreadLocalRandom number: " + randomNumber);
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(names.get(i));
+        }
     }
 
 }
